@@ -10,6 +10,9 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
 
     fun getEmployees(): Collection<Employee> {
         val employees = employeeRepository.findAll()
+        if (employees.isEmpty()){
+            throw NoSuchElementException("No employees in the system")
+        }
         return employees
     }
 
@@ -29,9 +32,8 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
         }
     }
 
-    fun updateEmployee(employee: Employee ,id: Int): Employee {
-         val existingEmployee=employeeRepository.findEmployeeById(id)
-        return  addEmployee(employee)
-    }
+    fun updateEmployee(employee: Employee ,id: Int): Employee = employeeRepository.findEmployeeById(id)?.let{addEmployee(employee)}
+        ?: throw EmployeeNotFoundException("Employee not found")
 
-}
+    }
+    class EmployeeNotFoundException(message: String) : RuntimeException(message)
