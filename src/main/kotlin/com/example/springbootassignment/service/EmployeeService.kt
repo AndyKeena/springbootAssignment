@@ -32,6 +32,20 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
         }
     }
 
+    fun viewEmployeeByName(firstName: String){
+        employeeRepository.viewEmployeeByName(firstName)?.let {
+            return@let employeeRepository.viewEmployeeByName(firstName)
+        }
+    }
+
+    fun findNICStartsWith90(): Collection<Employee> {
+        val employees = employeeRepository.findAll()
+            return employees.filter { employee ->
+                val NICOfEmployee =  employee.NIC
+                NICOfEmployee.startsWith("90")
+            }
+    }
+
     fun updateEmployee(employee: Employee ,id: Int): Employee = employeeRepository.findEmployeeById(id)?.let{addEmployee(employee)}
         ?: throw EmployeeNotFoundException("Employee not found")
 
