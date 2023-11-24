@@ -32,11 +32,19 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
         }
     }
 
-    fun viewEmployeeByName(firstName: String){
-        employeeRepository.viewEmployeeByName(firstName)?.let {
-            return@let employeeRepository.viewEmployeeByName(firstName)
-        }
+//    fun viewEmployeeByName(firstName: String):Unit {
+//        employeeRepository.viewEmployeeByName(firstName)?.let {
+//            return@let employeeRepository.viewEmployeeByName(firstName)
+//        }
+//    }
+
+    fun viewEmployeeByName(firstName: String): Employee? {
+        employeeRepository.findByFirstName(firstName)?.let {
+            return employeeRepository.findByFirstName(firstName)
+        } ?: throw IllegalArgumentException(" ${firstName} does not exist.")
     }
+
+
 
     fun findNICStartsWith90(): Collection<Employee> {
         val employees = employeeRepository.findAll()

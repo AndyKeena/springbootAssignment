@@ -25,9 +25,8 @@ class EmployeeController (val employeeService: EmployeeService) {
     @PatchMapping("/update/{employeeId}")
      fun updateEmployee(@RequestBody employee: Employee, @PathVariable employeeId: Int):Employee=employeeService.updateEmployee(employee,employeeId)
     @GetMapping("/{firstName}")
-    fun viewEmployeeByName(@PathVariable firstName: String) {
-       return employeeService.viewEmployeeByName(firstName)
-    }
+    fun viewEmployeeByName(@PathVariable firstName: String):Employee?  =employeeService.viewEmployeeByName(firstName)
+
 
     @GetMapping("/NIC90")
     fun findNICStartsWith90(): Collection<Employee> {

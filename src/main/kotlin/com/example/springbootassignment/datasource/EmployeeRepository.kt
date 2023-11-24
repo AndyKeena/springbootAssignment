@@ -7,6 +7,5 @@ import org.springframework.data.mongodb.repository.Query
 interface EmployeeRepository:MongoRepository<Employee, String> {
 
     fun findEmployeeById(id: Int): Employee? //return type can be null
-    fun viewEmployeeByName(firstName: String): String?
-    fun findNICStartsWith90(NIC: String): String?
+    fun findByFirstName(firstName: String): Employee?
 }

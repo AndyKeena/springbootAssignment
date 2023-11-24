@@ -10,7 +10,7 @@ data class Employee(
     val id: Int,
     val firstName: String,
     val lastName: String,
-    val NIC: String,
-    val yearJoined: Int
+    val NIC: String="",
+    val yearJoined: Int=2022
 
 )
