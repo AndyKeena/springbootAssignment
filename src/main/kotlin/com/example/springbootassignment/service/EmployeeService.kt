@@ -3,6 +3,8 @@ package com.example.springbootassignment.service
 import com.example.springbootassignment.datasource.EmployeeRepository
 import com.example.springbootassignment.model.Employee
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.RequestParam
+import java.time.Year
 import java.util.NoSuchElementException
 
 @Service
@@ -32,11 +34,11 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
         }
     }
 
-//    fun viewEmployeeByName(firstName: String):Unit {
-//        employeeRepository.viewEmployeeByName(firstName)?.let {
-//            return@let employeeRepository.viewEmployeeByName(firstName)
-//        }
-//    }
+    fun deleteEmployee(id: Int): Employee? {
+       employeeRepository.findEmployeeById(id)?.let {
+           return employeeRepository.deleteById(id)
+       } ?: throw IllegalArgumentException("Employee does not exist.")
+   }
 
     fun viewEmployeeByName(firstName: String): Employee? {
         employeeRepository.findByFirstName(firstName)?.let {
@@ -46,13 +48,28 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
 
 
 
-    fun findNICStartsWith90(): Collection<Employee> {
+    fun findNicStartsWith(@RequestParam startingDigits: String): Collection<Employee> {
         val employees = employeeRepository.findAll()
             return employees.filter { employee ->
-                val NICOfEmployee =  employee.NIC
-                NICOfEmployee.startsWith("90")
+//                val nicOfEmployee =  employee.NIC
+                employee.NIC?.startsWith(startingDigits) ?: throw Exception("NIC not found")
             }
     }
+
+    fun findEmployeesWorkedMoreThan5Years(): Collection<Employee> {
+        val currentYear = Year.now().value
+        val employees = employeeRepository.findAll()
+
+        return employees.filter { employee ->
+            val yearsWorked = currentYear - employee.yearJoined
+            yearsWorked > 5
+        }
+    }
+
+
+
+
+
 
     fun updateEmployee(employee: Employee ,id: Int): Employee = employeeRepository.findEmployeeById(id)?.let{addEmployee(employee)}
         ?: throw EmployeeNotFoundException("Employee not found")

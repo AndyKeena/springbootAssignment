@@ -8,4 +8,5 @@ interface EmployeeRepository:MongoRepository<Employee, String> {
 
     fun findEmployeeById(id: Int): Employee? //return type can be null
     fun findByFirstName(firstName: String): Employee?
+    fun deleteById(employeeId: Int): Employee?
 }

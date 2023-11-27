@@ -23,13 +23,18 @@ class EmployeeController (val employeeService: EmployeeService) {
     fun deleteEmployee(): String =  employeeService.deleteAllEmployee()
 
     @PatchMapping("/update/{employeeId}")
-     fun updateEmployee(@RequestBody employee: Employee, @PathVariable employeeId: Int):Employee=employeeService.updateEmployee(employee,employeeId)
+     fun updateEmployee(@RequestBody employee: Employee, @PathVariable employeeId: Int):Employee = employeeService.updateEmployee(employee,employeeId)
     @GetMapping("/{firstName}")
-    fun viewEmployeeByName(@PathVariable firstName: String):Employee?  =employeeService.viewEmployeeByName(firstName)
+    fun viewEmployeeByName(@PathVariable firstName: String):Employee?  = employeeService.viewEmployeeByName(firstName)
 
-
-    @GetMapping("/NIC90")
-    fun findNICStartsWith90(): Collection<Employee> {
-        return employeeService.findNICStartsWith90()
+    @GetMapping("/nic/{startWith}")
+    fun findNicStartsWith(@PathVariable startWith: String): Collection<Employee> {
+        return employeeService.findNicStartsWith(startWith)
     }
+
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteByEmployeeId(@PathVariable id :Int):Employee? = employeeService.deleteEmployee(id)
+
 }
