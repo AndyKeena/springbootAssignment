@@ -7,19 +7,19 @@ import Search from './pages/Search';
 import MovieDetail from './components/MovieDetails';
 
 const App: React.FC = () => {
-  return (
-    <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/top-rated" element={<TopRated />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/details" element={<MovieDetail />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/top-rated" element={<TopRated />} />
+                    <Route path="/search" element={<Search />} />
+                    <Route path="/details" element={<MovieDetail />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 };
 
 export default App;

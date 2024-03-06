@@ -23,9 +23,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	// val myString = "org.springframework.boot:spring-boot-starter-webflux" - Remove or comment out this line
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	// implementation("com.google.firebase:firebase-admin:8.1.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
-
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs += "-Xjsr305=strict"

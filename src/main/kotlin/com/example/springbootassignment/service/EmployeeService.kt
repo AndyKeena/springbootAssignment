@@ -12,6 +12,10 @@ class EmployeeService(val employeeRepository: EmployeeRepository) {
 
     fun getEmployees(): Collection<Employee> {
         val employees = employeeRepository.findAll()
+        println("----------------------------------------------------------------------------------")
+        println(employees)
+        println("----------------------------------------------------------------------------------")
+
         if (employees.isEmpty()){
             throw NoSuchElementException("No employees in the system")
         }

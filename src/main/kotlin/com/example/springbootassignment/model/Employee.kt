@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDate
 
-@Document(collection = "employees")
+@Document(collection = "employee")
 data class Employee(
     @Id
     val id: Int,
@@ -13,5 +13,4 @@ data class Employee(
     val NIC: String?,
     val yearJoined: Int,
     val departmentId: Int?
-
 )
